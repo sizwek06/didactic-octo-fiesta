@@ -10,4 +10,6 @@ import UIKit
 
 struct TodoStrings {
     
+    static let todoListTitle = "To-Do List"
+    static let settingsViewTitle = "Settings"
 }

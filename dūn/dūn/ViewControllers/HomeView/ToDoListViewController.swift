@@ -7,8 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ToDoListViewController: UIViewController {
 
+    class func create() -> ToDoListViewController {
+        let toDoListViewController = ToDoListViewController()
+        
+        return toDoListViewController
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
