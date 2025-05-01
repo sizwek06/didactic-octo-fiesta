@@ -18,6 +18,7 @@ class SingleLabelCollectionViewCell: UICollectionViewCell {
     
     lazy var cellLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "SFProText-Semibold", size: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

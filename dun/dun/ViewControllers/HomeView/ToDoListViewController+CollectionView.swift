@@ -94,13 +94,13 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
         
         switch todoListSections(rawValue: indexPath.section) {
         case .completedList:
-            header.dateLabel.text = "Completed"
+            header.headerLabel.text = "Completed"
             return header
         case .todoList:
-            header.dateLabel.text = "To Do"
+            header.headerLabel.text = "To Do"
             return header
         default:
-            header.dateLabel.text = "Add another?"
+            header.headerLabel.text = "Add another?"
             
             return header
         }

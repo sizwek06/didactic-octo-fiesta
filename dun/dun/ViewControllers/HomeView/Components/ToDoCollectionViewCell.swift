@@ -24,6 +24,7 @@ class ToDoCollectionViewCell: UICollectionViewCell {
         // TODO: Add font & textColor
         label.numberOfLines = 0
         label.textColor = UIColor(named: "AppearanceColor")
+        label.font = UIFont(name: "SFProText-Semibold", size: 17)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -86,11 +87,4 @@ class ToDoCollectionViewCell: UICollectionViewCell {
         todoItemNameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         todoItemNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
     }
-    
-//    func configureCell(description: String,
-//                       isCompleted: Bool) {
-//        
-//        self.todoItem?.description = description
-//        self.todoItem?.isCompleted = isCompleted
-//    }
 }
