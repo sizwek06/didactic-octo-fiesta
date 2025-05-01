@@ -42,6 +42,6 @@ class ToDoTabBarController: UITabBarController {
         settingsNavigationController.tabBarItem.selectedImage = UIImage(systemName: "gearshape.fill")
         
         self.tabBar.tintColor = UIColor(named: "AppearanceColor")
-        self.setViewControllers([todoListViewController, settingsNavigationController], animated: true)
+        self.setViewControllers([todoListNavigationController, settingsNavigationController], animated: true)
     }
 }

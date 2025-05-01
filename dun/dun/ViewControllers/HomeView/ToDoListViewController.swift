@@ -13,6 +13,8 @@ class ToDoListViewController: UIViewController {
                                 ToDoItem(todoDescription: "Test 1", isCompleted: true),
                                 ToDoItem(todoDescription: "Test 2", isCompleted: false),
                                 ToDoItem(todoDescription: "Test 3", isCompleted: true),
+                                ToDoItem(todoDescription: "Test 2", isCompleted: false),
+                                ToDoItem(todoDescription: "Test 3", isCompleted: true),
                                 ToDoItem(todoDescription: "Test 4", isCompleted: false)
                                 ]
 
@@ -22,7 +24,7 @@ class ToDoListViewController: UIViewController {
         return toDoListViewController
     }
     
-    lazy var modulesCollectionView: UICollectionView = {
+    lazy var todoListCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 10
         flowLayout.minimumInteritemSpacing = 10
@@ -38,6 +40,10 @@ class ToDoListViewController: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 12.0, right: 16.0)
         collectionView.register(ToDoCollectionViewCell.self,
                                 forCellWithReuseIdentifier: ToDoCollectionViewCell.identifier)
+        collectionView.register(SingleLabelCollectionViewCell.self,
+                                forCellWithReuseIdentifier: SingleLabelCollectionViewCell.identifier)
+        collectionView.register(Header.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: Header.identifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -50,17 +56,16 @@ class ToDoListViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        view.addSubview(modulesCollectionView)
+        view.addSubview(todoListCollectionView)
         
-        modulesCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        modulesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        modulesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        modulesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        modulesCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        todoListCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        todoListCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        todoListCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        todoListCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        todoListCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     enum todoListSections: Int, CaseIterable {
-        case quote
         case todoList
         case completedList
         case newTodo

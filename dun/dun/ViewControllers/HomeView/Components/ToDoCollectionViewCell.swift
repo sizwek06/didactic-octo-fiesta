@@ -32,6 +32,8 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     lazy var todoItemCompletionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
+        imageView.tintColor = UIColor(named: "AppearanceColor")
+        imageView.image = UIImage(systemName: "checkmark.circle.fill")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -40,8 +42,8 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     lazy var todoItemDeletionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
+        imageView.tintColor = UIColor(named: "AppearanceColor")
         imageView.image = UIImage(systemName: "trash")
-        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -56,7 +58,7 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.white
+        backgroundColor = .gray
         setupUI()
     }
     
@@ -69,18 +71,20 @@ class ToDoCollectionViewCell: UICollectionViewCell {
         addSubview(todoItemDeletionImageView)
         addSubview(todoItemCompletionImageView)
         
-        todoItemDeletionImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
-        todoItemDeletionImageView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
-        todoItemDeletionImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
+        todoItemDeletionImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
+        todoItemDeletionImageView.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        todoItemDeletionImageView.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
+        todoItemDeletionImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15).isActive = true
         
-        todoItemCompletionImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
-        todoItemCompletionImageView.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
-        todoItemCompletionImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+        todoItemCompletionImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
+        todoItemCompletionImageView.heightAnchor.constraint(equalToConstant: 30.0).isActive = true
+        todoItemCompletionImageView.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
+        todoItemCompletionImageView.leftAnchor.constraint(equalTo: todoItemDeletionImageView.rightAnchor, constant: 85).isActive = true
         
-        todoItemNameLabel.topAnchor.constraint(equalTo: todoItemDeletionImageView.bottomAnchor, constant: 15).isActive = true
-        todoItemNameLabel.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
-        todoItemNameLabel.leftAnchor.constraint(equalTo: contentView.rightAnchor, constant: 5).isActive = true
+        todoItemNameLabel.topAnchor.constraint(equalTo: todoItemDeletionImageView.bottomAnchor, constant: 20).isActive = true
+        todoItemNameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15).isActive = true
         todoItemNameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+        todoItemNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
     }
     
 //    func configureCell(description: String,
