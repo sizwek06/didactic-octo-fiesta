@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		28D963D62DC38EDF00E7D99E /* dunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D963D42DC38EDF00E7D99E /* dunTests.swift */; };
+		28D963DA2DC38EEB00E7D99E /* dunUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D963D82DC38EEB00E7D99E /* dunUITestsLaunchTests.swift */; };
+		28D963DB2DC38EEB00E7D99E /* dunUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D963D72DC38EEB00E7D99E /* dunUITests.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		28D963182DC36B9100E7D99E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,28 +30,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		28D962FE2DC36B8900E7D99E /* dūn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dūn.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		28D963172DC36B9100E7D99E /* dūnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dūnTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		28D963212DC36B9100E7D99E /* dūnUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "dūnUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D962FE2DC36B8900E7D99E /* dun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D963172DC36B9100E7D99E /* dunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D963212DC36B9100E7D99E /* dunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dunUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28D963D42DC38EDF00E7D99E /* dunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dunTests.swift; sourceTree = "<group>"; };
+		28D963D72DC38EEB00E7D99E /* dunUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dunUITests.swift; sourceTree = "<group>"; };
+		28D963D82DC38EEB00E7D99E /* dunUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dunUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		28D963292DC36B9100E7D99E /* Exceptions for "dūn" folder in "dūn" target */ = {
+		28D963292DC36B9100E7D99E /* Exceptions for "dun" folder in "dun" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 28D962FD2DC36B8900E7D99E /* dūn */;
+			target = 28D962FD2DC36B8900E7D99E /* dun */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		28D963002DC36B8900E7D99E /* dūn */ = {
+		28D963002DC36B8900E7D99E /* dun */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				28D963292DC36B9100E7D99E /* Exceptions for "dūn" folder in "dūn" target */,
+				28D963292DC36B9100E7D99E /* Exceptions for "dun" folder in "dun" target */,
 			);
-			path = "dūn";
+			path = dun;
 			sourceTree = "<group>";
 		};
 		28D9631A2DC36B9100E7D99E /* dūnTests */ = {
@@ -88,7 +97,9 @@
 		28D962F52DC36B8900E7D99E = {
 			isa = PBXGroup;
 			children = (
-				28D963002DC36B8900E7D99E /* dūn */,
+				28D963002DC36B8900E7D99E /* dun */,
+				28D963D92DC38EEB00E7D99E /* dunUITests */,
+				28D963D52DC38EDF00E7D99E /* dunTests */,
 				28D9631A2DC36B9100E7D99E /* dūnTests */,
 				28D963242DC36B9100E7D99E /* dūnUITests */,
 				28D962FF2DC36B8900E7D99E /* Products */,
@@ -98,19 +109,36 @@
 		28D962FF2DC36B8900E7D99E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				28D962FE2DC36B8900E7D99E /* dūn.app */,
-				28D963172DC36B9100E7D99E /* dūnTests.xctest */,
-				28D963212DC36B9100E7D99E /* dūnUITests.xctest */,
+				28D962FE2DC36B8900E7D99E /* dun.app */,
+				28D963172DC36B9100E7D99E /* dunTests.xctest */,
+				28D963212DC36B9100E7D99E /* dunUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		28D963D52DC38EDF00E7D99E /* dunTests */ = {
+			isa = PBXGroup;
+			children = (
+				28D963D42DC38EDF00E7D99E /* dunTests.swift */,
+			);
+			path = dunTests;
+			sourceTree = "<group>";
+		};
+		28D963D92DC38EEB00E7D99E /* dunUITests */ = {
+			isa = PBXGroup;
+			children = (
+				28D963D72DC38EEB00E7D99E /* dunUITests.swift */,
+				28D963D82DC38EEB00E7D99E /* dunUITestsLaunchTests.swift */,
+			);
+			path = dunUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		28D962FD2DC36B8900E7D99E /* dūn */ = {
+		28D962FD2DC36B8900E7D99E /* dun */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28D9632A2DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dūn" */;
+			buildConfigurationList = 28D9632A2DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dun" */;
 			buildPhases = (
 				28D962FA2DC36B8900E7D99E /* Sources */,
 				28D962FB2DC36B8900E7D99E /* Frameworks */,
@@ -121,18 +149,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				28D963002DC36B8900E7D99E /* dūn */,
+				28D963002DC36B8900E7D99E /* dun */,
 			);
-			name = "dūn";
+			name = dun;
 			packageProductDependencies = (
 			);
 			productName = "dūn";
-			productReference = 28D962FE2DC36B8900E7D99E /* dūn.app */;
+			productReference = 28D962FE2DC36B8900E7D99E /* dun.app */;
 			productType = "com.apple.product-type.application";
 		};
-		28D963162DC36B9100E7D99E /* dūnTests */ = {
+		28D963162DC36B9100E7D99E /* dunTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28D9632F2DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dūnTests" */;
+			buildConfigurationList = 28D9632F2DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dunTests" */;
 			buildPhases = (
 				28D963132DC36B9100E7D99E /* Sources */,
 				28D963142DC36B9100E7D99E /* Frameworks */,
@@ -146,16 +174,16 @@
 			fileSystemSynchronizedGroups = (
 				28D9631A2DC36B9100E7D99E /* dūnTests */,
 			);
-			name = "dūnTests";
+			name = dunTests;
 			packageProductDependencies = (
 			);
 			productName = "dūnTests";
-			productReference = 28D963172DC36B9100E7D99E /* dūnTests.xctest */;
+			productReference = 28D963172DC36B9100E7D99E /* dunTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		28D963202DC36B9100E7D99E /* dūnUITests */ = {
+		28D963202DC36B9100E7D99E /* dunUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 28D963322DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dūnUITests" */;
+			buildConfigurationList = 28D963322DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dunUITests" */;
 			buildPhases = (
 				28D9631D2DC36B9100E7D99E /* Sources */,
 				28D9631E2DC36B9100E7D99E /* Frameworks */,
@@ -169,11 +197,11 @@
 			fileSystemSynchronizedGroups = (
 				28D963242DC36B9100E7D99E /* dūnUITests */,
 			);
-			name = "dūnUITests";
+			name = dunUITests;
 			packageProductDependencies = (
 			);
 			productName = "dūnUITests";
-			productReference = 28D963212DC36B9100E7D99E /* dūnUITests.xctest */;
+			productReference = 28D963212DC36B9100E7D99E /* dunUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -199,7 +227,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 28D962F92DC36B8900E7D99E /* Build configuration list for PBXProject "dūn" */;
+			buildConfigurationList = 28D962F92DC36B8900E7D99E /* Build configuration list for PBXProject "dun" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -213,9 +241,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				28D962FD2DC36B8900E7D99E /* dūn */,
-				28D963162DC36B9100E7D99E /* dūnTests */,
-				28D963202DC36B9100E7D99E /* dūnUITests */,
+				28D962FD2DC36B8900E7D99E /* dun */,
+				28D963162DC36B9100E7D99E /* dunTests */,
+				28D963202DC36B9100E7D99E /* dunUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -256,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D963D62DC38EDF00E7D99E /* dunTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +292,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D963DA2DC38EEB00E7D99E /* dunUITestsLaunchTests.swift in Sources */,
+				28D963DB2DC38EEB00E7D99E /* dunUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,12 +302,12 @@
 /* Begin PBXTargetDependency section */
 		28D963192DC36B9100E7D99E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 28D962FD2DC36B8900E7D99E /* dūn */;
+			target = 28D962FD2DC36B8900E7D99E /* dun */;
 			targetProxy = 28D963182DC36B9100E7D99E /* PBXContainerItemProxy */;
 		};
 		28D963232DC36B9100E7D99E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 28D962FD2DC36B8900E7D99E /* dūn */;
+			target = 28D962FD2DC36B8900E7D99E /* dun */;
 			targetProxy = 28D963222DC36B9100E7D99E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -291,10 +322,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N5CTMB8PTT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "dūn/Info.plist";
+				INFOPLIST_FILE = dun/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "dūn";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -302,11 +334,15 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.test.du-n";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.dun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -319,10 +355,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N5CTMB8PTT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "dūn/Info.plist";
+				INFOPLIST_FILE = dun/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "dūn";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -330,11 +367,15 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.test.du-n";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.dun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -472,7 +513,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dūn.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dūn";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dun.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dun";
 			};
 			name = Debug;
 		};
@@ -491,7 +532,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dūn.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dūn";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dun.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dun";
 			};
 			name = Release;
 		};
@@ -532,7 +573,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		28D962F92DC36B8900E7D99E /* Build configuration list for PBXProject "dūn" */ = {
+		28D962F92DC36B8900E7D99E /* Build configuration list for PBXProject "dun" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				28D9632D2DC36B9100E7D99E /* Debug */,
@@ -541,7 +582,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		28D9632A2DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dūn" */ = {
+		28D9632A2DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dun" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				28D9632B2DC36B9100E7D99E /* Debug */,
@@ -550,7 +591,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		28D9632F2DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dūnTests" */ = {
+		28D9632F2DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dunTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				28D963302DC36B9100E7D99E /* Debug */,
@@ -559,7 +600,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		28D963322DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dūnUITests" */ = {
+		28D963322DC36B9100E7D99E /* Build configuration list for PBXNativeTarget "dunUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				28D963332DC36B9100E7D99E /* Debug */,

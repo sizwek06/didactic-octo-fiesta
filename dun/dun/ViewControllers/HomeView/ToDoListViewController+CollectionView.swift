@@ -1,0 +1,104 @@
+//
+//  ToDoListViewController+CollectionView.swift
+//  dūn
+//
+//  Created by Sizwe Khathi on 2025/05/01.
+//
+
+import UIKit
+
+extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return todoListSections.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let todoList = todoList else { return 0 }
+        
+        var completedItems: [ToDoItem] = []
+        var unCompletedItems: [ToDoItem] = []
+        
+        todoList.forEach { item in
+             if item.isCompleted {
+                 completedItems.append(item)
+             } else {
+                 unCompletedItems.append(item)
+             }
+         }
+        
+        switch todoListSections(rawValue: section) {
+        case .completedList:
+            return completedItems.count
+        case .todoList:
+            return unCompletedItems.count
+        default:
+            return 1
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 10.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let todoCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoCollectionViewCell.identifier, for: indexPath) as? ToDoCollectionViewCell,
+              let todoItems = self.todoList else {
+            return UICollectionViewCell()
+        }
+        
+        var completedItems: [ToDoItem] = []
+        var unCompletedItems: [ToDoItem] = []
+        
+       todoItems.forEach { item in
+            if item.isCompleted {
+                completedItems.append(item)
+            } else {
+                unCompletedItems.append(item)
+            }
+        }
+        
+        switch todoListSections(rawValue: indexPath.item) {
+        case .quote:
+            let todoItem = unCompletedItems[indexPath.item]
+            todoCollectionCell.todoItem = todoItem
+//            todoCollectionCell.configureCell(description: todoItem.description,
+//                                             isCompleted: todoItem.isCompleted)
+//
+            return todoCollectionCell
+        case .completedList:
+            todoCollectionCell.todoItem = completedItems[indexPath.item]
+            
+           return todoCollectionCell
+        case .todoList:
+           
+            let todoItem = unCompletedItems[indexPath.item]
+            todoCollectionCell.todoItem = todoItem
+//            todoCollectionCell.configureCell(description: todoItem.description,
+//                                             isCompleted: todoItem.isCompleted)
+//            
+            return todoCollectionCell
+        default:
+            let todoItem = unCompletedItems[indexPath.item]
+            todoCollectionCell.todoItem = todoItem
+//            todoCollectionCell.configureCell(description: todoItem.description,
+//                                             isCompleted: todoItem.isCompleted)
+//
+            return todoCollectionCell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        switch todoListSections(rawValue: indexPath.item) {
+        case .completedList, .todoList:
+            let cellWidth = UIScreen.main.bounds.width * 0.5 - 22.0
+            let cellHeight = UIScreen.main.bounds.width * 0.5 + 50.0
+            return CGSize(width: cellWidth, height: cellHeight)
+        default:
+            return CGSize(width: UIScreen.main.bounds.width - 24.0, height: 140.0)
+        }
+    }
+}

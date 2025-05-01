@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TabBarController: UITabBarController {
+class ToDoTabBarController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
