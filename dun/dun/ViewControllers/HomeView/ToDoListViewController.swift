@@ -10,6 +10,7 @@ import UIKit
 class ToDoListViewController: UIViewController {
     
     var viewModel: TodoItemsViewModel!
+    let biometricAuthManager = BiometricAuthManager()
     
     class func create() -> ToDoListViewController {
         let toDoListViewController = ToDoListViewController()
@@ -47,12 +48,10 @@ class ToDoListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = TodoStrings.todoListTitle
-        
-        self.viewModel.retrieveStoredData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.setupCollectionView()
+        verifyBiometricState()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,6 +66,44 @@ class ToDoListViewController: UIViewController {
         todoListCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         todoListCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         todoListCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    func setupView() {
+        switch DunBiometricState.sharedInstance.currentState {
+        case .verifyFaceIdFailed, .signingInWithFaceId, .faceIDRequired:
+            break
+        case .signedInWithFaceId, .signedInNoFaceId:
+            DunBiometricState.sharedInstance.currentState = .signedInWithFaceId
+            
+            self.viewModel.retrieveStoredData()
+            
+            self.setupCollectionView()
+        }
+    }
+    
+    func verifyBiometricState() {
+        
+        if UserDefaults.standard.bool(forKey: TodoStrings.userDefaultBiometricsKey) {
+            DunBiometricState.sharedInstance.currentState = .signingInWithFaceId
+            
+            biometricAuthManager.canEvaluate { (canEvaluate, _, _) in
+                guard canEvaluate else {
+                    DunBiometricState.sharedInstance.currentState = .signedInNoFaceId
+                    return
+                }
+                
+                biometricAuthManager.evaluate { [weak self] (success, _) in
+                    guard let self else { return }
+                    guard success else {
+                        DunBiometricState.sharedInstance.currentState = .verifyFaceIdFailed
+                        return
+                    }
+                    DunBiometricState.sharedInstance.currentState = .signedInWithFaceId
+                    self.setupView()
+                }
+            }
+        }
+        self.setupView()
     }
     
     enum todoListSections: Int, CaseIterable {
