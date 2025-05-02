@@ -9,18 +9,14 @@ import UIKit
 
 class ToDoListViewController: UIViewController {
     
-    var todoList: [ToDoItem]? = [
-                                ToDoItem(todoDescription: "Test 1", isCompleted: true),
-                                ToDoItem(todoDescription: "Test 2", isCompleted: false),
-                                ToDoItem(todoDescription: "Test 3", isCompleted: true),
-                                ToDoItem(todoDescription: "Test 2", isCompleted: false),
-                                ToDoItem(todoDescription: "Test 3", isCompleted: true),
-                                ToDoItem(todoDescription: "Test 4", isCompleted: false)
-                                ]
-
+    var viewModel: TodoItemsViewModel!
+    
     class func create() -> ToDoListViewController {
         let toDoListViewController = ToDoListViewController()
+        let persistedTodoItemsManager = PersistedTodoItemsImplementation()
         
+        toDoListViewController.viewModel = TodoItemsViewModel(persistedTodoItemsManager: persistedTodoItemsManager,
+                                                              delegate: toDoListViewController)
         return toDoListViewController
     }
     
@@ -52,7 +48,15 @@ class ToDoListViewController: UIViewController {
         super.viewDidLoad()
         title = TodoStrings.todoListTitle
         
+        self.viewModel.retrieveStoredData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.setupCollectionView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.viewModel.resetArrays()
     }
     
     private func setupCollectionView() {
