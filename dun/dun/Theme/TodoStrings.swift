@@ -11,7 +11,7 @@ import UIKit
 struct TodoStrings {
     
     static let todoListTitle = "To-Do List"
-    static let todoListButtonTitle = "New Todo Item"
+    static let todoListButtonTitle = "Add Todo Item"
     static let noTodoItemsListText = "No Todo Items"
     
     static let settingsViewTitle = "Settings"

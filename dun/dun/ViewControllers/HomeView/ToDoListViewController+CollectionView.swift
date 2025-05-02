@@ -31,8 +31,6 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        print("ViewController ViewModel Array: \(self.viewModel.todoArray)")
-        
         switch todoListSections(rawValue: indexPath.section) {
             
         case .completedList:
@@ -61,7 +59,7 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
             header.headerLabel.text = "To Do"
             return header
         default:
-            header.headerLabel.text = "Add another?"
+            header.headerLabel.text = "New Todo Item?"
             
             return header
         }

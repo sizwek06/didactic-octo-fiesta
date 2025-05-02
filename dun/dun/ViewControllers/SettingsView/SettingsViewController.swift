@@ -17,6 +17,8 @@ class SettingsViewController: UIViewController {
         return table
     }()
     
+    let persistedTodoItemsManager = PersistedTodoItemsImplementation()
+    
     class func create() -> SettingsViewController {
         let settingsViewController = SettingsViewController()
         

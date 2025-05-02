@@ -31,8 +31,6 @@ final class TodoItemsViewModel {
         
         self.persistedTodoItemsManager.saveToDoItemsToCoreData(todoItems: items,
                                                                isCompletedItems: isCompleted)
-        print("Saved to Array Entities, new array: \(self.todoArray)")
-        print("New Array: \(items)")
         
         UserDefaults.standard.set(true, forKey: TodoStrings.todoStoredKey)
         retrieveStoredData()
@@ -52,7 +50,6 @@ final class TodoItemsViewModel {
             
             self.todoArray = todoItems
             self.completedArray = completedItems
-            print("Current Array Entities: \(self.todoArray)")
         } else {
             self.requestFirstTodo()
         }

@@ -10,6 +10,10 @@ import UIKit
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 1 ? SettingsOptions.allCases.count : 1
     }
@@ -46,8 +50,26 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch SettingsOptions(rawValue: indexPath.row) {
+        case .purge:
+            let alert = UIAlertController(title: "Delete All Items",
+                                          message: "This action will permanently delete", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                
+                self.persistedTodoItemsManager.clearTodoItemsData(isCompletedItems: false)
+                self.persistedTodoItemsManager.clearTodoItemsData(isCompletedItems: true)
+            }))
+            
+            alert.addAction(UIAlertAction(title: TodoStrings.alertCancel, style: .cancel, handler: { _ in
+                alert.dismiss(animated: true)
+            }))
+            
+            self.present(alert, animated: true)
+        default:
+            break
+        }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
