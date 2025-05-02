@@ -16,6 +16,10 @@ class ToDoCollectionViewCell: UICollectionViewCell {
             
             self.todoItemNameLabel.text = todoItem.itemDescription
             self.todoItemCompletionImageView.image = todoItem.isCompleted ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "checkmark.circle")
+            
+            todoItemNameLabel.alpha = !todoItem.isCompleted ? 1.0 : 0.5
+            todoItemCompletionImageView.alpha = !todoItem.isCompleted ? 1.0 : 0.6
+            todoItemDeletionImageView.alpha = !todoItem.isCompleted ? 1.0 : 0.6
         }
     }
     
@@ -49,6 +53,8 @@ class ToDoCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    var itemPosition: Int = 0
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = 6.0
@@ -59,7 +65,7 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .gray
+        backgroundColor = .white
         setupUI()
     }
     

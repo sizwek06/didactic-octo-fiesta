@@ -7,8 +7,6 @@
 
 extension ToDoListViewController: TodoItemsProtocol {
     func reloadView() {
-        self.setupLists()
-        
         self.todoListCollectionView.reloadData()
     }
     

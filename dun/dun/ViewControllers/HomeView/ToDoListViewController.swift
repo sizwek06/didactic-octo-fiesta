@@ -10,8 +10,6 @@ import UIKit
 class ToDoListViewController: UIViewController {
     
     var viewModel: TodoItemsViewModel!
-    var completedItems: [ToDoItem] = []
-    var unCompletedItems: [ToDoItem] = []
     
     class func create() -> ToDoListViewController {
         let toDoListViewController = ToDoListViewController()
@@ -51,7 +49,6 @@ class ToDoListViewController: UIViewController {
         title = TodoStrings.todoListTitle
         
         self.viewModel.retrieveStoredData()
-        self.setupLists()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,23 +67,6 @@ class ToDoListViewController: UIViewController {
         todoListCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         todoListCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         todoListCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
-    
-    func setupLists() {
-        self.completedItems = []
-        self.unCompletedItems = []
-        
-        self.viewModel.todoArray.forEach { item in
-            if !item.isCompleted {
-                unCompletedItems.append(item)
-            }
-        }
-        
-        self.viewModel.completedArray.forEach { item in
-            if item.isCompleted {
-                completedItems.append(item)
-            }
-        }
     }
     
     enum todoListSections: Int, CaseIterable {

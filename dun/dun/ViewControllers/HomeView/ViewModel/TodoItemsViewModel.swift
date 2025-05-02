@@ -21,7 +21,7 @@ final class TodoItemsViewModel {
         self.delegate = delegate
     }
     
-    func addTodoItem(items: [ToDoItem]) {
+    func addTodoItem(items: [ToDoItem], isCompleted: Bool = false) {
         let todoItemsStored = UserDefaults.standard.bool(forKey: TodoStrings.todoStoredKey)
         
         if todoItemsStored {
@@ -29,7 +29,8 @@ final class TodoItemsViewModel {
             self.resetArrays()
         }
         
-        self.persistedTodoItemsManager.saveToDoItemsToCoreData(todoItems: items, isCompletedItems: false)
+        self.persistedTodoItemsManager.saveToDoItemsToCoreData(todoItems: items,
+                                                               isCompletedItems: isCompleted)
         print("Saved to Array Entities, new array: \(self.todoArray)")
         print("New Array: \(items)")
         
@@ -38,6 +39,7 @@ final class TodoItemsViewModel {
     }
     
     func retrieveStoredData() {
+        self.resetArrays()
         let todoItemsStored = UserDefaults.standard.bool(forKey: TodoStrings.todoStoredKey)
         
         if todoItemsStored {

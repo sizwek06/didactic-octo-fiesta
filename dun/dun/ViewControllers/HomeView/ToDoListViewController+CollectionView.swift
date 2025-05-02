@@ -17,9 +17,9 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
         
         switch todoListSections(rawValue: section) {
         case .completedList:
-            return completedItems.isEmpty ? 1 : completedItems.count
+            return self.viewModel.completedArray.isEmpty ? 1 : self.viewModel.completedArray.count
         case .todoList:
-            return unCompletedItems.isEmpty ? 1 : unCompletedItems.count
+            return self.viewModel.todoArray.isEmpty ? 1 : self.viewModel.todoArray.count
         default:
             return 1
         }
@@ -36,9 +36,13 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
         switch todoListSections(rawValue: indexPath.section) {
             
         case .completedList:
-            return completedItems.isEmpty ? self.createSingLabelCell(with: TodoStrings.noTodoItemsListText, indexPath: indexPath) : self.createTodoCell(with: completedItems[indexPath.item], indexPath: indexPath)
+            if self.viewModel.completedArray.isEmpty {
+                return self.createSingLabelCell(with: TodoStrings.noTodoItemsListText, indexPath: indexPath)
+            } else {
+                return self.createTodoCell(with: self.viewModel.completedArray[indexPath.item], indexPath: indexPath)
+            }
         case .todoList:
-            return unCompletedItems.isEmpty ? self.createSingLabelCell(with: TodoStrings.noTodoItemsListText, indexPath: indexPath) : self.createTodoCell(with: unCompletedItems[indexPath.item], indexPath: indexPath)
+            return self.viewModel.todoArray.isEmpty ? self.createSingLabelCell(with: TodoStrings.noTodoItemsListText, indexPath: indexPath) : self.createTodoCell(with: self.viewModel.todoArray[indexPath.item], indexPath: indexPath)
         default:
             return self.createSingLabelCell(with: TodoStrings.todoListButtonTitle, indexPath: indexPath)
         }
@@ -67,9 +71,9 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
         
         switch todoListSections(rawValue: indexPath.section) {
         case .completedList:
-            return self.completedItems.isEmpty ? self.returnSingleCellSize() : self.calculateCellSize()
+            return self.viewModel.completedArray.isEmpty ? self.returnSingleCellSize() : self.calculateCellSize()
         case .todoList:
-            return self.unCompletedItems.isEmpty ? self.returnSingleCellSize() : self.calculateCellSize()
+            return self.viewModel.todoArray.isEmpty ? self.returnSingleCellSize() : self.calculateCellSize()
         default:
             return self.returnSingleCellSize()
         }
@@ -81,6 +85,31 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch todoListSections(rawValue: indexPath.section) {
+        case .todoList:
+            if !self.viewModel.todoArray.isEmpty {
+                self.returnUpdateAlert(itemPosition: indexPath.item)
+            } else {
+                self.launchTodoAddAlert()
+            }
+        case .completedList:
+            if !self.viewModel.completedArray.isEmpty {
+                let todoItem = self.viewModel.completedArray[indexPath.item]
+                
+                let alert = UIAlertController(title: "Delete \(todoItem.itemDescription ?? "Unknown Description")",
+                                              message: "This action will permanently delete", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                    
+                    self.viewModel.completedArray.remove(at: indexPath.item)
+                    self.viewModel.addTodoItem(items: self.viewModel.completedArray, isCompleted: true)
+                }))
+                
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    alert.dismiss(animated: true)
+                }))
+                
+                self.present(alert, animated: true)
+            }
         case .newTodo:
             self.launchTodoAddAlert()
         default:
@@ -133,7 +162,9 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
         guard let todoCollectionCell = todoListCollectionView.dequeueReusableCell(withReuseIdentifier: ToDoCollectionViewCell.identifier, for: indexPath) as? ToDoCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
         todoCollectionCell.todoItem = with
+        todoCollectionCell.itemPosition = indexPath.item
         
         return todoCollectionCell
     }
@@ -157,5 +188,33 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
     
     func returnSingleCellSize() -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width - 24.0, height: 70.0)
+    }
+    
+    func returnUpdateAlert(itemPosition: Int) {
+        let todoItem = self.viewModel.todoArray[itemPosition]
+        
+        let alert = UIAlertController(title: "Update \(todoItem.itemDescription ?? "Unknown Todo name")",
+                                      message: "Please select an option to continue", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Complete", style: .default, handler: { _ in
+
+            self.viewModel.todoArray.remove(at: itemPosition)
+            self.viewModel.completedArray.append(ToDoItem(todoDescription: todoItem.itemDescription,
+                                                          isCompleted: true))
+            
+            self.viewModel.addTodoItem(items: self.viewModel.completedArray, isCompleted: true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            
+            self.viewModel.completedArray.remove(at: itemPosition)
+            self.viewModel.addTodoItem(items: self.viewModel.todoArray, isCompleted: false)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            alert.dismiss(animated: true)
+        }))
+        
+        self.present(alert, animated: true)
     }
 }
