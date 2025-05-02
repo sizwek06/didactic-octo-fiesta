@@ -9,18 +9,16 @@ import UIKit
 
 class ToDoListViewController: UIViewController {
     
-    var todoList: [ToDoItem]? = [
-                                ToDoItem(todoDescription: "Test 1", isCompleted: true),
-                                ToDoItem(todoDescription: "Test 2", isCompleted: false),
-                                ToDoItem(todoDescription: "Test 3", isCompleted: true),
-                                ToDoItem(todoDescription: "Test 2", isCompleted: false),
-                                ToDoItem(todoDescription: "Test 3", isCompleted: true),
-                                ToDoItem(todoDescription: "Test 4", isCompleted: false)
-                                ]
-
+    var viewModel: TodoItemsViewModel!
+    var completedItems: [ToDoItem] = []
+    var unCompletedItems: [ToDoItem] = []
+    
     class func create() -> ToDoListViewController {
         let toDoListViewController = ToDoListViewController()
+        let persistedTodoItemsManager = PersistedTodoItemsImplementation()
         
+        toDoListViewController.viewModel = TodoItemsViewModel(persistedTodoItemsManager: persistedTodoItemsManager,
+                                                              delegate: toDoListViewController)
         return toDoListViewController
     }
     
@@ -52,7 +50,16 @@ class ToDoListViewController: UIViewController {
         super.viewDidLoad()
         title = TodoStrings.todoListTitle
         
+        self.viewModel.retrieveStoredData()
+        self.setupLists()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.setupCollectionView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.viewModel.resetArrays()
     }
     
     private func setupCollectionView() {
@@ -63,6 +70,23 @@ class ToDoListViewController: UIViewController {
         todoListCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         todoListCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         todoListCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    func setupLists() {
+        self.completedItems = []
+        self.unCompletedItems = []
+        
+        self.viewModel.todoArray.forEach { item in
+            if !item.isCompleted {
+                unCompletedItems.append(item)
+            }
+        }
+        
+        self.viewModel.completedArray.forEach { item in
+            if item.isCompleted {
+                completedItems.append(item)
+            }
+        }
     }
     
     enum todoListSections: Int, CaseIterable {

@@ -18,13 +18,13 @@ final class PersistedTodoItemsImplementation: PersistedTodoItemsProtocol {
         return appDelegate.persistentContainer.viewContext
     }
     
-    func getTodoRequest() -> NSFetchRequest<NSFetchRequestResult> {
-        return NSFetchRequest<NSFetchRequestResult>(entityName: ToDoItem.todoEntityName)
+    func getTodoRequest(isCompletedItems: Bool) -> NSFetchRequest<NSFetchRequestResult> {
+        return isCompletedItems ? NSFetchRequest<NSFetchRequestResult>(entityName: ToDoItem.completedTodoEntityName) :  NSFetchRequest<NSFetchRequestResult>(entityName: ToDoItem.todoEntityName)
     }
     
-    func clearTodoItemsData() {
+    func clearTodoItemsData(isCompletedItems: Bool = true) {
         do {
-            let fetchRequest = getTodoRequest()
+            let fetchRequest = getTodoRequest(isCompletedItems: isCompletedItems)
             let transactions = try managedObjectContext.fetch(fetchRequest) as? [NSManagedObject]
             _ = transactions.map {
                 $0.map {
@@ -38,9 +38,11 @@ final class PersistedTodoItemsImplementation: PersistedTodoItemsProtocol {
         }
     }
     
-    func createTodoEntity(from newTodoItem: ToDoItem) -> NSManagedObject? {
+    func createTodoEntity(from newTodoItem: ToDoItem, isCompletedItems: Bool) -> NSManagedObject? {
         
-        let todoItem = NSEntityDescription.insertNewObject(forEntityName: ToDoItem.todoEntityName,
+        let entityName = isCompletedItems ? ToDoItem.completedTodoEntityName : ToDoItem.todoEntityName
+        
+        let todoItem = NSEntityDescription.insertNewObject(forEntityName: entityName,
                                                            into: managedObjectContext)
         
         todoItem.setValue(newTodoItem.itemDescription, forKey: TodoStrings.coreDataDescription)
@@ -55,10 +57,11 @@ final class PersistedTodoItemsImplementation: PersistedTodoItemsProtocol {
         return newTodoItem
     }
     
-    func saveToDoItemsToCoreData(todoItems: [ToDoItem]) {
+    func saveToDoItemsToCoreData(todoItems: [ToDoItem], isCompletedItems: Bool) {
+        
         
         _ = todoItems.map {
-            self.createTodoEntity(from: $0)
+            self.createTodoEntity(from: $0, isCompletedItems: isCompletedItems)
         }
         
         do {
@@ -69,10 +72,10 @@ final class PersistedTodoItemsImplementation: PersistedTodoItemsProtocol {
         }
     }
     
-    func fetchPersistedTodoItems() -> [ToDoItem] {
+    func fetchPersistedTodoItems(isCompletedItems: Bool) -> [ToDoItem] {
         
         var todoItems: [ToDoItem] = []
-        let fetchRequest = getTodoRequest()
+        let fetchRequest = getTodoRequest(isCompletedItems: isCompletedItems)
         
         fetchRequest.returnsObjectsAsFaults = false
         

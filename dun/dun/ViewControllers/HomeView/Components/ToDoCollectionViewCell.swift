@@ -14,7 +14,7 @@ class ToDoCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let todoItem = todoItem else { return }
             
-            self.todoItemNameLabel.text = todoItem.description
+            self.todoItemNameLabel.text = todoItem.itemDescription
             self.todoItemCompletionImageView.image = todoItem.isCompleted ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "checkmark.circle")
         }
     }

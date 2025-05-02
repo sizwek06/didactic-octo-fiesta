@@ -11,10 +11,10 @@ import CoreData
 protocol PersistedTodoItemsProtocol: AnyObject {
     var managedObjectContext: NSManagedObjectContext { get }
    
-    func getTodoRequest() -> NSFetchRequest<NSFetchRequestResult>
-    func clearTodoItemsData()
-    func createTodoEntity(from newTodoItem: ToDoItem) -> NSManagedObject?
+    func getTodoRequest(isCompletedItems: Bool) -> NSFetchRequest<NSFetchRequestResult>
+    func clearTodoItemsData(isCompletedItems: Bool)
+    func createTodoEntity(from newTodoItem: ToDoItem, isCompletedItems: Bool) -> NSManagedObject?
     func createTodoItemFromManagedObject(from ToDoItem: NSManagedObject) -> ToDoItem
-    func saveToDoItemsToCoreData(todoItems: [ToDoItem])
-    func fetchPersistedTodoItems() -> [ToDoItem]
+    func saveToDoItemsToCoreData(todoItems: [ToDoItem], isCompletedItems: Bool)
+    func fetchPersistedTodoItems(isCompletedItems: Bool) -> [ToDoItem]
 }

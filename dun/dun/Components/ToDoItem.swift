@@ -16,6 +16,10 @@ struct ToDoItem {
         return TodoStrings.todoEntityKey
     }
     
+    public static var completedTodoEntityName: String {
+        return TodoStrings.completedToDoEntityKey
+    }
+    
     public init(todoDescription: String,
                 isCompleted: Bool) {
         

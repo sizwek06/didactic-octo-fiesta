@@ -19,6 +19,7 @@ struct TodoStrings {
     static let generalUnknownError = "An unknown error occurred"
     static let todoStoredKey = "todoStoredKey"
     static let todoEntityKey = "ToDoItems"
+    static let completedToDoEntityKey = "CompletedToDoItems"
     
     static let coreDataDescription = "itemDescription"
     static let coreDataCompletion = "isCompleted"
