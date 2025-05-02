@@ -104,7 +104,7 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
                     self.viewModel.addTodoItem(items: self.viewModel.completedArray, isCompleted: true)
                 }))
                 
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                alert.addAction(UIAlertAction(title: TodoStrings.alertCancel, style: .cancel, handler: { _ in
                     alert.dismiss(animated: true)
                 }))
                 
@@ -127,21 +127,21 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
         let addAction = UIAlertAction(title: "Add Item", style: .default) { [weak self] action in
             guard let self else { return }
             
-            print("Old Count: \(self.viewModel.todoArray.count)")
-            let newItem = ToDoItem(todoDescription: textField.text ?? TodoStrings.generalUnknownError,
-                                   isCompleted: false)
-            self.viewModel.todoArray.append(newItem)
-            // TODO: Use a better placeholder for error handling
-            print("New Item added onto Array: \(self.viewModel.todoArray)")
-            print("New Count: \(self.viewModel.todoArray.count)")
-            
-            let newArray = self.viewModel.todoArray
-            print("New Array: \(newArray)")
-           
-            self.viewModel.addTodoItem(items: newArray)
+            if let todoItemDescription = textField.text {
+                let newItem = ToDoItem(todoDescription: textField.text ?? TodoStrings.generalUnknownError,
+                                       isCompleted: false)
+                
+                self.viewModel.todoArray.append(newItem)
+                
+                let newArray = self.viewModel.todoArray
+                self.viewModel.addTodoItem(items: newArray)
+            } else {
+                self.dismiss(animated: true)
+                launchTodoAddAlert()
+            }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { [weak self] action in
+        let cancelAction = UIAlertAction(title: TodoStrings.alertCancel, style: .destructive) { [weak self] action in
             guard let self else { return }
             
             self.dismiss(animated: true)
@@ -211,7 +211,7 @@ extension ToDoListViewController: UICollectionViewDelegate, UICollectionViewDele
             self.viewModel.addTodoItem(items: self.viewModel.todoArray, isCompleted: false)
         }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+        alert.addAction(UIAlertAction(title: TodoStrings.alertCancel, style: .cancel, handler: { _ in
             alert.dismiss(animated: true)
         }))
         
